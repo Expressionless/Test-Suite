@@ -1,4 +1,4 @@
-package au.com.expressionless.suite.test;
+package au.com.expressionless.suite.test.core;
 
 import java.util.ArrayList;
 import java.util.List;

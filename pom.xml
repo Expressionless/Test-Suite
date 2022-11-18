@@ -6,7 +6,7 @@
 
   <groupId>au.com.expressionless</groupId>
   <artifactId>test-suite</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>v0.1.0</version>
 
   <name>test-suite</name>
   <!-- FIXME change it to the project's website -->

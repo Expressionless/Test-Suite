@@ -1,4 +1,4 @@
-package au.com.expressionless.suite.test;
+package au.com.expressionless.suite.test.core;
 
 import au.com.expressionless.suite.test.callbacks.FITestCallback;
 import au.com.expressionless.suite.test.callbacks.FITestVerificationCallback;
