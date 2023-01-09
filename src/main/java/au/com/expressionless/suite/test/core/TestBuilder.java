@@ -3,7 +3,7 @@ package au.com.expressionless.suite.test.core;
 import au.com.expressionless.suite.test.callbacks.FITestCallback;
 import au.com.expressionless.suite.test.callbacks.FITestVerificationCallback;
 
-class TestBuilder<I, E> {
+public class TestBuilder<I, E> {
 
     private Input<I> input;
     private Expected<E> expected;
@@ -11,6 +11,8 @@ class TestBuilder<I, E> {
     private JUnitTester<I, E> tester;
 
     private String name;
+    private String description;
+
     private FITestCallback<Input<I>, Expected<E>> testCallback;
     private FITestVerificationCallback<E> verificationCallback;
     
@@ -52,6 +54,31 @@ class TestBuilder<I, E> {
         return this;
     }
 
+    /**
+     * Set the description of a TestCase (accepts multiple strings). Each new string will be represented as a new line
+     * @param description - String or array of strings to make the description
+     * @return this TestBuilder
+     */
+    public TestBuilder<I, E> setDescription(String... description) {
+        if(description == null) {
+            throw new UnsupportedOperationException("Cannot call setDescription with null");
+        }
+
+        // nice and easy edge cases
+        if(description.length == 0) {
+            this.description = "none supplied";
+            return this;
+        }
+
+        if(description.length == 1) {
+            this.description = description[0];
+            return this;
+        }
+
+        this.description = String.join("\n" + TestCase.SPACE_BREAK, description);
+        return this;
+    }
+
     public JUnitTester<I,E> build() {
         if(tester == null) {
             throw new UnsupportedOperationException("Cannot call .build() on a Builder that was instantiated with new Builder(). Use .buildTest() instead");
@@ -75,6 +102,12 @@ class TestBuilder<I, E> {
             throw new IllegalArgumentException("No Expected result set for test: " + name);
         }
 
-        return new TestCase<I, E>(name, input, expected, testCallback, verificationCallback != null ? verificationCallback : tester.verificationCallback);
+        return new TestCase<I, E>(
+            name, 
+            input, 
+            expected, 
+            testCallback, 
+            verificationCallback != null ? verificationCallback : tester.verificationCallback, 
+            description);
     }
 }

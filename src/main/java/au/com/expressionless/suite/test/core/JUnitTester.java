@@ -98,6 +98,8 @@ public class JUnitTester<I, E> {
     }
 
     public JUnitTester<I, E> assertAll() {
+        if(tests.size() == 0)
+            System.err.println("No tests to check!");
         for(TestCase<I, E> test : tests) {
             test.verify();
         }
