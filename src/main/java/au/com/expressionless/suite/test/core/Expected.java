@@ -1,7 +1,5 @@
 package au.com.expressionless.suite.test.core;
 
-
-
 public class Expected<T> {
     public T expected;
 
